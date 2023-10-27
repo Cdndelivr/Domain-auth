@@ -1,0 +1,14 @@
+{
+  "name": "your-server-app",
+  "version": "1.0.0",
+  "description": "Your Node.js server application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "body-parser": "^1.19.0"
+    // Add other dependencies here if needed
+  }
+}
