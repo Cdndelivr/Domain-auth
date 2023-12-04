@@ -2,6 +2,7 @@
   "name": "Verify Domain Script",
   "version": "1.0.0",
   "description": "Blogger Safeguard Pro",
+  "main": "src/V3-Latest.js",
   "scripts": {
     "build": "webpack"
   },
