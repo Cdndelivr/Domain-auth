@@ -1,5 +1,3 @@
-// verifyDomain.js
-
 const allowedDomains = require('./allowedDomains.json');
 
 exports.handler = async (event, context) => {
