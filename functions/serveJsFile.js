@@ -1,25 +1,27 @@
-// verifyDomain.js
-const allowedDomains = ['example.com', 'anotherdomain.com']; // Add your allowed domains
+// functions/serveJsFile.js
 
-exports.handler = async function (event, context) {
-    const { origin } = event.headers;
+const allowedDomains = [
+  'https://your-allowed-domain.com',
+  // Add more domains as needed
+];
 
-    // Check if the requesting domain is in the allowedDomains list
-    if (allowedDomains.includes(origin)) {
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ message: 'Domain verified successfully.' }),
-            headers: {
-                'Access-Control-Allow-Origin': origin,
-            },
-        };
-    } else {
-        return {
-            statusCode: 403,
-            body: JSON.stringify({ error: 'Unauthorized domain.' }),
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-            },
-        };
-    }
+exports.handler = async (event, context) => {
+  const { referer } = event.headers;
+
+  if (allowedDomains.includes(referer)) {
+    // If the requesting domain is whitelisted, serve the JavaScript file
+    return {
+      statusCode: 200,
+      body: `console.log("Your protected JavaScript code");`,
+      headers: {
+        'Content-Type': 'application/javascript',
+      },
+    };
+  } else {
+    // If the requesting domain is not whitelisted, deny access
+    return {
+      statusCode: 403,
+      body: 'Access forbidden. Your domain is not whitelisted.',
+    };
+  }
 };
