@@ -1,25 +1,27 @@
-// verifyDomain.js
-const allowedDomains = ['example.com', 'anotherdomain.com']; // Add your allowed domains
+// serveJsFile.js
 
-exports.handler = async function (event, context) {
-    const { origin } = event.headers;
+const fetch = require('node-fetch');
 
-    // Check if the requesting domain is in the allowedDomains list
-    if (allowedDomains.includes(origin)) {
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ message: 'Domain verified successfully.' }),
-            headers: {
-                'Access-Control-Allow-Origin': origin,
-            },
-        };
-    } else {
-        return {
-            statusCode: 403,
-            body: JSON.stringify({ error: 'Unauthorized domain.' }),
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-            },
-        };
-    }
+exports.handler = async (event, context) => {
+  const { domain } = JSON.parse(event.body);
+
+  // Verify the domain using the verifyDomain function
+  const response = await fetch(`${process.env.URL}/.netlify/functions/verifyDomain`, {
+    method: 'POST',
+    body: JSON.stringify({ domain }),
+  });
+
+  if (response.ok) {
+    // Domain is authorized, serve the JavaScript file
+    return {
+      statusCode: 200,
+      body: 'console.log("Your JavaScript code");',
+    };
+  } else {
+    // Domain is not authorized, return an error or placeholder script
+    return {
+      statusCode: 403,
+      body: 'console.error("Unauthorized domain.");',
+    };
+  }
 };
