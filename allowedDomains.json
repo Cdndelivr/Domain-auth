@@ -1,0 +1,6 @@
+// allowedDomains.json
+[
+  "example.com", 
+  "subdomain.example.com", 
+  "anotherdomain.com"
+]
