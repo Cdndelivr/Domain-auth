@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Blogger Safeguard Pro",
   "scripts": {
-    "build": "webpack"
+    "build": "npm run build"
   },
   "dependencies": {
   "react": "^17.0.2",
