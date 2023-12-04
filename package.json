@@ -1,0 +1,11 @@
+{
+  "name": "Verify Domain Script",
+  "version": "1.0.0",
+  "description": "Blogger Safeguard Pro",
+  "scripts": {
+    "build": "npm run build"
+  },
+  "dependencies": {
+    "your-dependency": "version"
+  }
+}
