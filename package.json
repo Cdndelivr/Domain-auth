@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Blogger Safeguard Pro",
   "scripts": {
-    "build": "npm run build"
+    "build": "webpack"
   },
   "dependencies": {
     "your-dependency": "version"
