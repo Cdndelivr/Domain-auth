@@ -1,35 +1,46 @@
 const fetch = require('node-fetch');
 
 exports.handler = async (event, context) => {
-  const { domain } = JSON.parse(event.body);
+  try {
+    console.log('Received event:', event);
 
-  // Verify the domain using the verifyDomain function
-  const response = await fetch(`${process.env.URL}/.netlify/functions/verifyDomain`, {
-    method: 'POST',
-    body: JSON.stringify({ domain }),
-  });
+    const { domain } = JSON.parse(event.body);
+    console.log('Parsed domain:', domain);
 
-  let statusCode, responseBody;
+    // Verify the domain using the verifyDomain function
+    const response = await fetch(`${process.env.URL}/.netlify/functions/verifyDomain`, {
+      method: 'POST',
+      body: JSON.stringify({ domain }),
+    });
 
-  if (response.ok) {
-    // Domain is authorized, serve the JavaScript code
-    statusCode = 200;
-    responseBody = 'console.log("Your JavaScript code");';
-  } else {
-    // Domain is not authorized, return an error or placeholder script
-    statusCode = 403;
-    responseBody = 'console.error("Unauthorized domain.");';
+    let statusCode, responseBody;
+
+    if (response.ok) {
+      // Domain is authorized, serve the JavaScript code
+      statusCode = 200;
+      responseBody = 'console.log("Your JavaScript code");';
+    } else {
+      // Domain is not authorized, return an error or placeholder script
+      statusCode = 403;
+      responseBody = 'console.error("Unauthorized domain.");';
+    }
+
+    const headers = {
+      'Access-Control-Allow-Origin': '*', // Adjust this based on your requirements
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'POST',
+    };
+
+    return {
+      statusCode,
+      headers,
+      body: responseBody,
+    };
+  } catch (error) {
+    console.error('Error in serveJsFile handler:', error);
+    return {
+      statusCode: 500,
+      body: 'Internal Server Error',
+    };
   }
-
-  const headers = {
-    'Access-Control-Allow-Origin': '*', // Adjust this based on your requirements
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST',
-  };
-
-  return {
-    statusCode,
-    headers,
-    body: responseBody,
-  };
 };
