@@ -9,27 +9,27 @@ exports.handler = async (event, context) => {
     body: JSON.stringify({ domain }),
   });
 
+  let statusCode, responseBody;
+
   if (response.ok) {
-    // Domain is authorized, serve the JavaScript file
-    return {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*', // Adjust this based on your requirements
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST',
-      },
-      body: 'console.log("Your JavaScript code");',
-    };
+    // Domain is authorized, serve the JavaScript code
+    statusCode = 200;
+    responseBody = 'console.log("Your JavaScript code");';
   } else {
     // Domain is not authorized, return an error or placeholder script
-    return {
-      statusCode: 403,
-      headers: {
-        'Access-Control-Allow-Origin': '*', // Adjust this based on your requirements
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST',
-      },
-      body: 'console.error("Unauthorized domain.");',
-    };
+    statusCode = 403;
+    responseBody = 'console.error("Unauthorized domain.");';
   }
+
+  const headers = {
+    'Access-Control-Allow-Origin': '*', // Adjust this based on your requirements
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST',
+  };
+
+  return {
+    statusCode,
+    headers,
+    body: responseBody,
+  };
 };
