@@ -13,12 +13,22 @@ exports.handler = async (event, context) => {
     // Domain is authorized, serve the JavaScript file
     return {
       statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*', // Adjust this based on your requirements
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST',
+      },
       body: 'console.log("Your JavaScript code");',
     };
   } else {
     // Domain is not authorized, return an error or placeholder script
     return {
       statusCode: 403,
+      headers: {
+        'Access-Control-Allow-Origin': '*', // Adjust this based on your requirements
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST',
+      },
       body: 'console.error("Unauthorized domain.");',
     };
   }
