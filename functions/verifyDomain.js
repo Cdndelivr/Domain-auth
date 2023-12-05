@@ -1,4 +1,4 @@
-const allowedDomains = require('/allowedDomains.json');
+const allowedDomains = require('./allowedDomains.json');
 
 exports.handler = async (event, context) => {
   const { domain } = JSON.parse(event.body);
