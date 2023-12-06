@@ -1,5 +1,5 @@
 const allowedDomains = [
-  "safelink-pro.netlify.app",
+  "www.codeadvice.xyz",
   // Add more domains as needed
 ];
 
