@@ -24,7 +24,9 @@ exports.handler = async (event, context) => {
         body: 'console.log("Your JavaScript code");',
       };
     } else {
-      // Domain is not authorized, return an error or placeholder script
+      // Domain is not authorized, log an error and return an appropriate response
+      console.error('Unauthorized domain:', domain);
+
       return {
         statusCode: 403,
         headers: {
