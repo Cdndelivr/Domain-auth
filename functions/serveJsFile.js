@@ -4,7 +4,10 @@ exports.handler = async (event, context) => {
   try {
     console.log('Received event:', event);
 
-    const { domain } = JSON.parse(event.body);
+    const requestBody = event.body;
+    console.log('Raw request body:', requestBody);
+
+    const { domain } = JSON.parse(requestBody);
     console.log('Parsed domain:', domain);
 
     // Verify the domain using the verifyDomain function
