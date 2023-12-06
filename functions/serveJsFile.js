@@ -31,6 +31,8 @@ exports.handler = async (event, context) => {
       'Access-Control-Allow-Methods': 'POST',
     };
 
+    console.log('Returning response:', { statusCode, headers, responseBody });
+
     return {
       statusCode,
       headers,
@@ -40,7 +42,7 @@ exports.handler = async (event, context) => {
     console.error('Error in serveJsFile handler:', error);
     return {
       statusCode: 500,
-      body: 'Internal Server Error',
+      body: JSON.stringify({ error: error.message }),
     };
   }
 };
