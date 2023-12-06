@@ -14,7 +14,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 200,
       headers: {
-        'Access-Control-Allow-Origin': '*', // Allow requests from any origin
+        'Access-Control-Allow-Origin': 'https://www.codeadvice.xyz', // Allow requests from any origin
         'Access-Control-Allow-Headers': 'Content-Type',
         'Access-Control-Allow-Methods': 'POST',
       },
