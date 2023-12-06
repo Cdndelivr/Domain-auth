@@ -1,6 +1,6 @@
 const allowedDomains = [
   "www.codeadvice.xyz",
-  // Add more domains as needed
+  "safelink-pro.netlify.app"
 ];
 
 exports.handler = async (event, context) => {
