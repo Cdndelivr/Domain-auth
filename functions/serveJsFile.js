@@ -1,9 +1,15 @@
 const fetch = require('node-fetch');
 
 exports.handler = async (event, context) => {
-  const { domain } = JSON.parse(event.body);
-
   try {
+    // Ensure that event.body is not empty
+    if (!event.body) {
+      throw new Error('Request body is empty.');
+    }
+
+    const { domain } = JSON.parse(event.body);
+
+    // Verify the domain using the verifyDomain function
     const response = await fetch(`${process.env.URL}/.netlify/functions/verifyDomain`, {
       method: 'POST',
       body: JSON.stringify({ domain }),
