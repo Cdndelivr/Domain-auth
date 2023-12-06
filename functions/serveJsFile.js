@@ -2,6 +2,14 @@ const fetch = require('node-fetch');
 const allowedDomains = require('./allowedDomains.json');
 
 exports.handler = async (event, context) => {
+  // Check if event.body is empty
+  if (!event.body) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: 'Bad Request - Missing request body' }),
+    };
+  }
+
   const { domain } = JSON.parse(event.body);
 
   if (allowedDomains.includes(domain)) {
