@@ -20,11 +20,21 @@ exports.handler = async (event, context) => {
 
     return {
       statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*', // Set this to your actual domain in production
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST',
+      },
       body: jsCode,
     };
   } catch (error) {
     return {
       statusCode: 403,
+      headers: {
+        'Access-Control-Allow-Origin': '*', // Set this to your actual domain in production
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST',
+      },
       body: `console.error("${error.message}");`,
     };
   }
