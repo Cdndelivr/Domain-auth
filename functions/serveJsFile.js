@@ -9,9 +9,6 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ domain }),
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*', // Allow requests from any origin, adjust as needed
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST',
       },
     });
 
@@ -23,21 +20,11 @@ exports.handler = async (event, context) => {
 
     return {
       statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*', // Allow requests from any origin, adjust as needed
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST',
-      },
       body: jsCode,
     };
   } catch (error) {
     return {
       statusCode: 403,
-      headers: {
-        'Access-Control-Allow-Origin': '*', // Allow requests from any origin, adjust as needed
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST',
-      },
       body: `console.error("${error.message}");`,
     };
   }
