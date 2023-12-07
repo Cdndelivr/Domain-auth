@@ -5,7 +5,7 @@ exports.handler = async (event, context) => {
     const { domain } = JSON.parse(event.body);
 
     // Allow requests from your local development environment
-    const allowedOrigins = ['http://127.0.0.1:3000'];
+    const allowedOrigins = ['http://www.codeadvice.xyz'];
     const origin = event.headers.origin || '';
     if (allowedOrigins.includes(origin)) {
       return {
