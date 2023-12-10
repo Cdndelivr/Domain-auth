@@ -3,8 +3,8 @@
   publish = "dist"
   functions = "functions"
 [[headers]]
-  for = "/*"
+  for = "/.netlify/functions/*"
     [headers.values]
       Access-Control-Allow-Origin = "*"
-      Access-Control-Allow-Methods = "POST"
       Access-Control-Allow-Headers = "Content-Type"
+      Access-Control-Allow-Methods = "POST"
