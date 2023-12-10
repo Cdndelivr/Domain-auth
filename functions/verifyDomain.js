@@ -1,24 +1,20 @@
-const allowedDomains = [
-  "www.codeadvice.xyz",
-  "safelink-pro.netlify.app"
-];
+const sharedSecret = "QWERTY"; // Replace with your actual secret
 
 exports.handler = async (event, context) => {
-  try {
-    const { domain } = JSON.parse(event.body);
+  const { domain, secret } = JSON.parse(event.body);
 
-    if (allowedDomains.includes(domain)) {
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ message: 'Domain is authorized.' }),
-      };
-    } else {
-      throw new Error('Unauthorized domain.');
-    }
-  } catch (error) {
+  if (secret !== sharedSecret) {
     return {
       statusCode: 403,
-      body: JSON.stringify({ message: error.message }),
+      body: JSON.stringify({ message: 'Unauthorized request.' }),
     };
   }
+
+  // Your existing domain verification logic
+  // ...
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ message: 'Domain is authorized.' }),
+  };
 };
