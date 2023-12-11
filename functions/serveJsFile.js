@@ -1,23 +1,25 @@
-const express = require('express');
-const app = express();
+const fs = require('fs');
 
-app.use((req, res, next) => {
-  const allowedDomains = ['https://www.codeadvice.xyz', 'https://subdomain.example.com'];
-  const origin = req.get('Origin');
-  
+exports.handler = async function (event, context) {
+  const allowedDomains = ['https://example.com', 'https://subdomain.example.com'];
+  const origin = event.headers.origin;
+
   if (allowedDomains.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-    next();
+    // Read and serve the JavaScript file
+    const jsCode = fs.readFileSync('path/to/src/V3-Latest.js', 'utf-8');
+
+    return {
+      statusCode: 200,
+      body: jsCode,
+      headers: {
+        'Content-Type': 'application/javascript',
+        'Access-Control-Allow-Origin': origin,
+      },
+    };
   } else {
-    res.status(403).json({ error: 'Unauthorized domain' });
+    return {
+      statusCode: 403,
+      body: JSON.stringify({ error: 'Unauthorized domain' }),
+    };
   }
-});
-
-app.get('/your-protected-endpoint', (req, res) => {
-  // Your code here
-  res.json({ message: 'Success' });
-});
-
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
-});
+};
