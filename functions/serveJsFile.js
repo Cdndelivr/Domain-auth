@@ -1,41 +1,23 @@
-const fetch = require('node-fetch');
+const express = require('express');
+const app = express();
 
-exports.handler = async (event, context) => {
-  const { domain } = JSON.parse(event.body);
-
-  try {
-    const response = await fetch(`${process.env.URL}/.netlify/functions/verifyDomain`, {
-      method: 'POST',
-      body: JSON.stringify({ domain }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error('Unauthorized domain.');
-    }
-
-    const jsCode = 'console.log("Your JavaScript code");';
-
-    return {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*', // Set this to your actual domain in production
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST',
-      },
-      body: jsCode,
-    };
-  } catch (error) {
-    return {
-      statusCode: 403,
-      headers: {
-        'Access-Control-Allow-Origin': '*', // Set this to your actual domain in production
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST',
-      },
-      body: `console.error("${error.message}");`,
-    };
+app.use((req, res, next) => {
+  const allowedDomains = ['https://www.codeadvice.xyz', 'https://subdomain.example.com'];
+  const origin = req.get('Origin');
+  
+  if (allowedDomains.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    next();
+  } else {
+    res.status(403).json({ error: 'Unauthorized domain' });
   }
-};
+});
+
+app.get('/your-protected-endpoint', (req, res) => {
+  // Your code here
+  res.json({ message: 'Success' });
+});
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
