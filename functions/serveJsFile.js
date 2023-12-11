@@ -1,3 +1,5 @@
+// functions/serveJsFile.js
+
 const fs = require('fs');
 
 exports.handler = async function (event, context) {
@@ -6,7 +8,7 @@ exports.handler = async function (event, context) {
 
   if (allowedDomains.includes(origin)) {
     // Read and serve the JavaScript file
-    const jsCode = fs.readFileSync('path/to/src/V3-Latest.js', 'utf-8');
+    const jsCode = fs.readFileSync('/src/V3-Latest.js', 'utf-8');
 
     return {
       statusCode: 200,
