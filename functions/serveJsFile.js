@@ -3,7 +3,7 @@
 const fs = require('fs');
 
 exports.handler = async function (event, context) {
-  const allowedDomains = ['https://example.com', 'https://subdomain.example.com'];
+  const allowedDomains = ['https://www.codeadvice.xyz', 'https://subdomain.example.com'];
   const origin = event.headers.origin;
 
   if (allowedDomains.includes(origin)) {
