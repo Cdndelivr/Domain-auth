@@ -1,10 +1,8 @@
-// functions/serveJsFile.js
-
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 
 exports.handler = async function (event, context) {
-  const secretKey = 'qwerty123';
+  const secretKey = 'QWERTY123';
   const allowedDomains = ['https://example.com', 'https://subdomain.example.com'];
 
   const token = event.headers.authorization;
@@ -13,23 +11,25 @@ exports.handler = async function (event, context) {
     const decoded = jwt.verify(token, secretKey);
 
     const origin = decoded.origin;
-    if (allowedDomains.includes(origin)) {
-      const jsCode = fs.readFileSync('/src/V3-Latest.js', 'utf-8');
+    const requestingDomain = decoded.domain;
+
+    if (allowedDomains.includes(origin) && requestingDomain) {
+      const jsCode = fs.readFileSync('path/to/src/V3-Latest.js', 'utf-8');
 
       return {
         statusCode: 200,
         body: jsCode,
         headers: {
           'Content-Type': 'application/javascript',
-          'Access-Control-Allow-Origin': origin, // Set the correct origin dynamically
-          'Access-Control-Allow-Methods': 'GET', // Add other required methods if necessary
-          'Access-Control-Allow-Headers': 'Authorization', // Add other required headers if necessary
+          'Access-Control-Allow-Origin': origin,
+          'Access-Control-Allow-Methods': 'GET',
+          'Access-Control-Allow-Headers': 'Authorization',
         },
       };
     } else {
       return {
         statusCode: 403,
-        body: JSON.stringify({ error: 'Unauthorized domain' }),
+        body: JSON.stringify({ error: 'Unauthorized domain or missing domain in token' }),
       };
     }
   } catch (error) {
