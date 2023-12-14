@@ -2,8 +2,8 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 
 exports.handler = async function (event, context) {
-  const secretKey = 'QWERTY123';
-  const allowedDomains = ['https://example.com', 'https://subdomain.example.com'];
+  const secretKey = 'QWERTY123'; // Replace with your actual secret key
+  const allowedDomains = ['https://www.codeadvice.xyz']; // Update with your client's domain
 
   const token = event.headers.authorization;
 
@@ -21,7 +21,7 @@ exports.handler = async function (event, context) {
         body: jsCode,
         headers: {
           'Content-Type': 'application/javascript',
-          'Access-Control-Allow-Origin': origin,
+          'Access-Control-Allow-Origin': 'https://www.codeadvice.xyz', // Update with your client's domain
           'Access-Control-Allow-Methods': 'GET',
           'Access-Control-Allow-Headers': 'Authorization',
         },
