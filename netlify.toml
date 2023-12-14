@@ -2,7 +2,9 @@
   functions = "functions"
   command = "npm run build"
 
+# Remove global headers
+
 [[headers]]
-  for = "/*.js"
+  for = "/.netlify/functions/serveJsFile"
   [headers.values]
     Access-Control-Allow-Origin = "*"
