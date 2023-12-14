@@ -14,7 +14,7 @@ exports.handler = async function (event, context) {
     const requestingDomain = decoded.domain;
 
     if (allowedDomains.includes(origin) && requestingDomain) {
-      const jsCode = fs.readFileSync('path/to/src/V3-Latest.js', 'utf-8');
+      const jsCode = fs.readFileSync('./src/V3-Latest.js', 'utf-8');
 
       return {
         statusCode: 200,
