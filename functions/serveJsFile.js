@@ -1,37 +1,28 @@
+// functions/serveJsFile.js
+
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 
 exports.handler = async function (event, context) {
-  const secretKey = 'QWERTY123'; // Replace with your actual secret key
-  const allowedDomains = ['https://www.codeadvice.xyz']; // Update with your client's domain
+  const secretKey = 'QWERTY123';
 
   const token = event.headers.authorization;
 
   try {
     const decoded = jwt.verify(token, secretKey);
 
-    const origin = decoded.origin;
-    const requestingDomain = decoded.domain;
+    const jsCode = fs.readFileSync('./src/V3-Latest.js', 'utf-8');
 
-    if (allowedDomains.includes(origin) && requestingDomain) {
-      const jsCode = fs.readFileSync('./src/V3-Latest.js', 'utf-8');
-
-      return {
-        statusCode: 200,
-        body: jsCode,
-        headers: {
-          'Content-Type': 'application/javascript',
-          'Access-Control-Allow-Origin': 'https://www.codeadvice.xyz', // Update with your client's domain
-          'Access-Control-Allow-Methods': 'GET',
-          'Access-Control-Allow-Headers': 'Authorization',
-        },
-      };
-    } else {
-      return {
-        statusCode: 403,
-        body: JSON.stringify({ error: 'Unauthorized domain or missing domain in token' }),
-      };
-    }
+    return {
+      statusCode: 200,
+      body: jsCode,
+      headers: {
+        'Content-Type': 'application/javascript',
+        'Access-Control-Allow-Origin': '*', // Allow requests from any origin for testing purposes
+        'Access-Control-Allow-Methods': 'GET',
+        'Access-Control-Allow-Headers': 'Authorization',
+      },
+    };
   } catch (error) {
     return {
       statusCode: 401,
