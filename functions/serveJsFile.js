@@ -1,4 +1,3 @@
-// functions/serveV3LatestJsFile.js
 const fs = require('fs');
 const path = require('path');
 
@@ -8,7 +7,7 @@ exports.handler = async (event, context) => {
   // List of authorized domains
   const authorizedDomains = [
     'https://www.codeadvice.xyz',
-    // 'https://demo-techadvicev4.blogspot.com',
+    'https://demo-techadvicev4.blogspot.com',
     // Add more authorized domains as needed
   ];
 
@@ -20,7 +19,7 @@ exports.handler = async (event, context) => {
     if (authorizedDomains.includes(origin)) {
       try {
         // Read the content of v3-latest.js and serve it
-        const v3LatestPath = path.resolve(__dirname, './src/V3-Latest.js'); // Adjust the path as needed
+        const v3LatestPath = path.resolve(__dirname, '../src/V3-Latest.js'); // Adjust the path as needed
         const jsCode = fs.readFileSync(v3LatestPath, 'utf8');
 
         return {
@@ -29,6 +28,7 @@ exports.handler = async (event, context) => {
             'Access-Control-Allow-Origin': origin,
             'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type',
+            'Content-Type': 'application/javascript', // Set the content type to JavaScript
           },
           body: jsCode,
         };
