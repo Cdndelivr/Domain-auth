@@ -19,7 +19,7 @@ exports.handler = async (event, context) => {
     // Check if the origin is in the list of authorized domains
     if (authorizedDomains.includes(origin)) {
       // Read the content of v3-latest.js and serve it
-      const v3LatestPath = path.resolve(__dirname, '/src/v3-latest.js');
+      const v3LatestPath = path.resolve(__dirname, './src/v3-latest.js');
       const jsCode = fs.readFileSync(v3LatestPath, 'utf8');
 
       return {
