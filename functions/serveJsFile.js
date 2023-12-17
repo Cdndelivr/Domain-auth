@@ -25,10 +25,11 @@ exports.handler = async (event, context) => {
           'Access-Control-Allow-Headers': 'Content-Type',
         },
         body: jsCode,
-      };
+        };
     }
     else{
-      const jsCode = 'console.log("UnAuthorized");';
+      const jsCode = 'console.log("Devil");';
+    }
   }
 
   // Unauthorized access
