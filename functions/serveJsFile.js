@@ -27,9 +27,6 @@ exports.handler = async (event, context) => {
         body: jsCode,
         };
     }
-    else{
-      const jsCode = 'console.log("Devil");';
-    }
   }
 
   // Unauthorized access
