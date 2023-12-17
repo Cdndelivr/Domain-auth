@@ -34,7 +34,7 @@ exports.handler = async (event, context) => {
 
   // Unauthorized access
   return {
-        body: "Are You Trying To Copy My Code? Don't Worry, i can't do that!",
+      body: JSON.stringify({ error: 'Are You Trying To Copy My Code? Don't Worry, i can't do that!' }),
   };
 };
 
