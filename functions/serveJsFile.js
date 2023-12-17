@@ -25,14 +25,14 @@ exports.handler = async (event, context) => {
           'Access-Control-Allow-Headers': 'Content-Type',
         },
         body: jsCode,
-        };
+      };
     }
   }
 
   // Unauthorized access
   return {
-     statusCode: 403,
-      body: JSON.stringify({ error: 'Are You Trying To Copy My Code? Don't Worry, i can't do that!' }),
+    statusCode: 403,
+    body: JSON.stringify({ error: 'Unauthorized' }),
   };
 };
 
