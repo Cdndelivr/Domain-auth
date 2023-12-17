@@ -27,12 +27,14 @@ exports.handler = async (event, context) => {
         body: jsCode,
       };
     }
+    else{
+      const jsCode = 'console.log("UnAuthorized");';
   }
 
   // Unauthorized access
   return {
     statusCode: 403,
-    body: JSON.stringify({ error: 'Unauthorized' }),
+    body: JSON.stringify({ error: 'Na Muna Na ' }),
   };
 };
 
