@@ -34,8 +34,7 @@ exports.handler = async (event, context) => {
 
   // Unauthorized access
   return {
-    statusCode: 403,
-    body: JSON.stringify({ error: 'Na Muna Na ' }),
+    body: JSON.stringify('Hello, Are You Try To Copy My Code... Don't Worry you can do that'),
   };
 };
 
