@@ -1,14 +1,10 @@
-// functions/serveV3LatestJsFile.js
-const fs = require('fs');
-const path = require('path');
-
 exports.handler = async (event, context) => {
   const { headers } = event;
 
   // List of authorized domains
   const authorizedDomains = [
     'https://www.codeadvice.xyz',
-    'https://demo-techadvicev4.blogspot.com',
+    // 'https://demo-techadvicev4.blogspot.com',
     // Add more authorized domains as needed
   ];
 
@@ -18,9 +14,8 @@ exports.handler = async (event, context) => {
 
     // Check if the origin is in the list of authorized domains
     if (authorizedDomains.includes(origin)) {
-      // Read the content of v3-latest.js and serve it
-      const v3LatestPath = path.resolve(__dirname, './src/v3-latest.js');
-      const jsCode = fs.readFileSync(v3LatestPath, 'utf8');
+      // Fetch and serve your JavaScript code
+      const jsCode = 'console.log("Hello from server-side! - Devil");';
 
       return {
         statusCode: 200,
@@ -37,6 +32,6 @@ exports.handler = async (event, context) => {
   // Unauthorized access
   return {
     statusCode: 403,
-    body: JSON.stringify('Unauthorized'),
+    body: JSON.stringify('Code Is Not Found Here.. 😜'),
   };
 };
