@@ -1,9 +1,12 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/V3-Latest.js', // Adjust the entry point based on your project
+  entry: './src/V3-Latest.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+  },
+  optimization: {
+    minimize: true,
   },
 };
