@@ -1,4 +1,5 @@
-// functions/serveJsFile.js
+const fs = require('fs');
+const path = require('path');
 
 exports.handler = async (event, context) => {
   const { headers } = event;
@@ -15,18 +16,26 @@ exports.handler = async (event, context) => {
 
     // Check if the origin is in the list of authorized domains
     if (authorizedDomains.includes(origin)) {
-      // Fetch and serve your JavaScript code
-      const jsCode = 'console.log("Hello from server-side!");';
+      try {
+        // Load the content of the bundled JavaScript file
+        const jsCode = fs.readFileSync(path.resolve(__dirname, 'bundle.js'), 'utf8');
 
-      return {
-        statusCode: 200,
-        headers: {
-          'Access-Control-Allow-Origin': origin,
-          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
-        },
-        body: jsCode,
-      };
+        return {
+          statusCode: 200,
+          headers: {
+            'Access-Control-Allow-Origin': origin,
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type',
+          },
+          body: jsCode,
+        };
+      } catch (error) {
+        console.error('Error reading bundle.js:', error);
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ error: 'Internal Server Error' }),
+        };
+      }
     }
   }
 
