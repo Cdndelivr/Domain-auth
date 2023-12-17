@@ -1,10 +1,11 @@
+// functions/serveJsFile.js
+
 exports.handler = async (event, context) => {
   const { headers } = event;
 
   // List of authorized domains
   const authorizedDomains = [
     'https://www.codeadvice.xyz',
-    'https://demo-techadvicev4.blogspot.com',
     // Add more authorized domains as needed
   ];
 
@@ -15,7 +16,7 @@ exports.handler = async (event, context) => {
     // Check if the origin is in the list of authorized domains
     if (authorizedDomains.includes(origin)) {
       // Fetch and serve your JavaScript code
-      const jsCode = 'console.log("Hello from server-side!");';
+      const jsCode = '/* Your JavaScript code here */';
 
       return {
         statusCode: 200,
