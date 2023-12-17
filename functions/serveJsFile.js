@@ -1,3 +1,5 @@
+// functions/serveJsFile.js
+
 exports.handler = async (event, context) => {
   const { headers } = event;
 
