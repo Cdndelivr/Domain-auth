@@ -1,1 +1,0 @@
-(()=>{const e=[];fetch("/feeds/posts/default?alt=json&max-results=1000").then((e=>e.json())).then((t=>{e.push(...(t.feed.entry||[]).map((e=>e.link.find((e=>"alternate"===e.rel)).href)))})).catch((e=>console.error("Error fetching Posts:")))})();
