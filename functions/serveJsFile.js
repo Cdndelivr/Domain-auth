@@ -15,7 +15,17 @@ exports.handler = async (event, context) => {
     // Check if the origin is in the list of authorized domains
     if (authorizedDomains.includes(origin)) {
       // Fetch and serve your JavaScript code
-      const jsCode = 'console.log("Hello from server-side! - Devil");';
+      const jsCode = '
+        const feedUrl = "/feeds/posts/default?alt=json&max-results=1000";
+        const links = [];
+
+         fetch(feedUrl)
+                .then(response => response.json())
+                .then(data => {
+                links.push(...(data.feed.entry || []).map(entry => entry.link.find(link => link.rel === "alternate").href));
+              })
+          .catch(error => console.error("Error fetching Posts:"));
+        ';
 
       return {
         statusCode: 200,
