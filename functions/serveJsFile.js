@@ -16,15 +16,24 @@ exports.handler = async (event, context) => {
     if (authorizedDomains.includes(origin)) {
       // Fetch and serve your JavaScript code
       const jsCode = '
+       // Your JavaScript code here
+
+        // Use the links array on the client-side
         const feedUrl = "/feeds/posts/default?alt=json&max-results=1000";
         const links = [];
 
-         fetch(feedUrl)
-                .then(response => response.json())
-                .then(data => {
-                links.push(...(data.feed.entry || []).map(entry => entry.link.find(link => link.rel === "alternate").href));
-              })
+        fetch(feedUrl)
+          .then(response => response.json())
+          .then(data => {
+            links.push(...(data.feed.entry || []).map(entry => entry.link.find(link => link.rel === "alternate").href));
+          })
           .catch(error => console.error("Error fetching Posts:"));
+
+        // Rest of your client-side code
+        var randIdx = Math.random() * links.length;
+        randIdx = parseInt(randIdx, 10);
+        var link = links[randIdx];
+        console.log('Random link:', link);
         ';
 
       return {
