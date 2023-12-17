@@ -32,7 +32,7 @@ exports.handler = async (event, context) => {
   // Unauthorized access
   return {
     statusCode: 403,
-    body: JSON.stringify({ error: 'Unauthorized' }),
+    body: JSON.stringify('Unauthorized'),
   };
 };
 
