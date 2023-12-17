@@ -5,7 +5,7 @@ exports.handler = async (event, context) => {
 
   // List of authorized domains
   const authorizedDomains = [
-    'https://www.codeadvice.xyz',
+    'https://www.codeadvicee.xyz',
     // Add more authorized domains as needed
   ];
 
