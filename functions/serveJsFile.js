@@ -1,6 +1,3 @@
-const fs = require('fs');
-const path = require('path');
-
 exports.handler = async (event, context) => {
   const { headers } = event;
 
@@ -17,24 +14,15 @@ exports.handler = async (event, context) => {
 
     // Check if the origin is in the list of authorized domains
     if (authorizedDomains.includes(origin)) {
-      try {
-        // Read the content of v3-latest.js and serve it
-        const v3LatestPath = path.resolve(__dirname, '../src/V3-Latest.js'); // Adjust the path as needed
-        const jsCode = fs.readFileSync(v3LatestPath, 'utf8');
-
-        return {
-          statusCode: 200,
-          headers: {
-            'Access-Control-Allow-Origin': origin,
-            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type',
-            'Content-Type': 'application/javascript', // Set the content type to JavaScript
-          },
-          body: jsCode,
-        };
-      } catch (error) {
-        console.error('Error reading the file:', error);
-      }
+      return {
+        statusCode: 200,
+        headers: {
+          'Access-Control-Allow-Origin': origin,
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type',
+        },
+        body: '',
+      };
     }
   }
 
@@ -44,6 +32,7 @@ exports.handler = async (event, context) => {
     body: JSON.stringify('Unauthorized'),
   };
 };
+
 
 
 // exports.handler = async (event, context) => {
