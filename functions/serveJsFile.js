@@ -15,7 +15,7 @@ exports.handler = async (event, context) => {
     // Check if the origin is in the list of authorized domains
     if (authorizedDomains.includes(origin)) {
       // Fetch and serve your JavaScript code
-      const jsCode = 'console.log("Hello from server-side! - Devil");';
+      const jsCode = 'console.log("Hello from server-side! - You Can acceess the code");';
 
       return {
         statusCode: 200,
