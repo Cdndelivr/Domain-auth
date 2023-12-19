@@ -1,4 +1,4 @@
-const authorizedDomains = require('./domains');
+const authorizedDomains = require('/domains');
 
 exports.handler = async (event, context) => {
   const { headers } = event;
