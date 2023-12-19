@@ -2,9 +2,3 @@
   command = "npm run build"
   functions = "functions"
   publish = "functions"
-
-[[redirects]]
-  from = "/.netlify/functions/serveV3LatestJsFile"
-  to = "/src/V3-Latest.js"
-  status = 200
-  force = true
