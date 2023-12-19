@@ -16,9 +16,6 @@ exports.handler = async (event, context) => {
     if (authorizedDomains.includes(origin)) {
       // Fetch and serve your JavaScript code
       const jsCode = `
-        const feedUrl = "/feeds/posts/default?alt=json&max-results=1000";
-        const links = [];
-
         fetch(feedUrl)
           .then(response => response.json())
           .then(data => {
