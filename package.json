@@ -1,8 +1,4 @@
 {
-  "name": "",
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/V3-Latest.js",
   "scripts": {
     "build": "webpack"
   },
