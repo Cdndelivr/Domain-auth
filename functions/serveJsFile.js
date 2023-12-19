@@ -3,7 +3,7 @@ exports.handler = async (event, context) => {
 
   // List of authorized domains
   const authorizedDomains = [
-    'https://www.codeadvice.xyz',
+    // 'https://www.codeadvice.xyz',
     // 'https://demo-techadvicev4.blogspot.com',
   ];
 
@@ -15,7 +15,7 @@ exports.handler = async (event, context) => {
 if (authorizedDomains.includes(origin)) {
   // Fetch and serve your JavaScript code
   const jsCode = `
-    console.log("Successfully Connected With Server");
+    console.log("Successfully Connected");
     fetch(feedUrl)
       .then(response => response.json())
       .then(data => {
