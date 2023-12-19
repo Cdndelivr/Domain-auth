@@ -1,11 +1,7 @@
+const authorizedDomains = require('./domains');
+
 exports.handler = async (event, context) => {
   const { headers } = event;
-
-  // List of authorized domains
-  const authorizedDomains = [
-    'https://www.codeadvice.xyz',
-    // 'https://demo-techadvicev4.blogspot.com',
-  ];
 
   if ('origin' in headers) {
     const origin = headers['origin'];
