@@ -14,15 +14,15 @@ exports.handler = async (event, context) => {
     // Check if the origin is in the list of authorized domains
     if (authorizedDomains.includes(origin)) {
       // Fetch and serve your JavaScript code
-      const jsCode = `
-      console.log("Succefully Connet With Server);
-        fetch(feedUrl)
-          .then(response => response.json())
-          .then(data => {
-            links.push(...(data.feed.entry || []).map(entry => entry.link.find(link => link.rel === "alternate").href));
-          })
-          .catch(error => console.error("Error fetching Posts:"));
-      `;
+     const jsCode = `
+  console.log("Successfully Connected With Server");
+  fetch(feedUrl)
+    .then(response => response.json())
+    .then(data => {
+      links.push(...(data.feed.entry || []).map(entry => entry.link.find(link => link.rel === "alternate").href));
+    })
+    .catch(error => console.error("Error fetching Posts:", error));
+`;
 
       return {
         statusCode: 200,
