@@ -1,4 +1,3 @@
-
 exports.handler = async (event, context) => {
   const { headers } = event;
 
