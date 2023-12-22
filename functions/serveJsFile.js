@@ -13,7 +13,7 @@ exports.handler = async (event, context) => {
     console.log('Calculated origin:', origin);
 
     if (authorizedDomains.includes(origin)) {
-      const jsFilePath = path.join(__dirname, 'functions/bundle.js');
+      const jsFilePath = path.join(__dirname, './bundle.js');
 
       try {
         const jsCode = fs.readFileSync(jsFilePath, 'utf8');
