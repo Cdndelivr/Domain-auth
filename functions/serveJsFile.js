@@ -9,7 +9,7 @@ exports.handler = async (event, context) => {
     const origin = headers['origin'];
 
     if (authorizedDomains.includes(origin)) {
-      const jsFilePath = path.join(__dirname, 'functions/bundle.js');
+      const jsFilePath = path.join(__dirname, 'src/V3-Latest.js');
 
       try {
         // Read the content of the JavaScript file asynchronously
