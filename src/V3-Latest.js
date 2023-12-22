@@ -1,3 +1,5 @@
+console.log("Successfully Connected With Server");
+
 fetch(feedUrl)
   .then(response => response.json())
   .then(data => {
