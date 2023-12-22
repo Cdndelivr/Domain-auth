@@ -1,6 +1,6 @@
 const authorizedDomains = [
   'https://www.codeadvice.xyz',
-  // 'https://demo-techadvicev4.blogspot.com',
+  // Add other authorized domains as needed
 ];
 
 module.exports = authorizedDomains;
