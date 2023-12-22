@@ -9,10 +9,10 @@ exports.handler = async (event, context) => {
     const origin = headers['origin'];
 
     if (authorizedDomains.includes(origin)) {
-      const jsFilePath = path.join(__dirname, 'src/V3-Latest.js');
+      const jsFilePath = path.join(__dirname, 'functions/bundle.js');
 
       try {
-        // Read the content of the JavaScript file synchronously
+        // Read the content of the bundled JavaScript file
         const jsCode = fs.readFileSync(jsFilePath, 'utf8');
 
         return {
@@ -25,7 +25,7 @@ exports.handler = async (event, context) => {
           body: jsCode,
         };
       } catch (error) {
-        console.error('Error reading JavaScript file:', error);
+        console.error('Error reading bundled JavaScript file:', error);
         return {
           statusCode: 500,
           headers: {
