@@ -10,7 +10,7 @@ exports.handler = async (event, context) => {
 
     if (authorizedDomains.includes(origin)) {
       
-       const jsFilePath = path.join(__dirname, 'functions/bundle.js');
+      const jsFilePath = path.join(__dirname, 'functions/bundle.js');
 
       try {
         // Read the content of the JavaScript file
