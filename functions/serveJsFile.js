@@ -5,20 +5,14 @@ const authorizedDomains = require('./domains');
 exports.handler = async (event, context) => {
   const { headers } = event;
 
-  console.log('Incoming headers:', headers);
-
   if ('origin' in headers) {
     const origin = headers['origin'];
 
-    console.log('Calculated origin:', origin);
-
     if (authorizedDomains.includes(origin)) {
-      const jsFilePath = path.join(__dirname, './bundle.js');
+      const jsFilePath = path.join(__dirname, 'functions/bundle.js');
 
       try {
         const jsCode = fs.readFileSync(jsFilePath, 'utf8');
-
-        console.log('JavaScript code:', jsCode);
 
         return {
           statusCode: 200,
@@ -33,6 +27,11 @@ exports.handler = async (event, context) => {
         console.error('Error reading JavaScript file:', error);
         return {
           statusCode: 500,
+          headers: {
+            'Access-Control-Allow-Origin': origin,
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type',
+          },
           body: JSON.stringify('Internal Server Error'),
         };
       }
@@ -43,9 +42,15 @@ exports.handler = async (event, context) => {
 
   return {
     statusCode: 403,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
     body: JSON.stringify('Unauthorized website access. 😜'),
   };
 };
+
 
 
 
