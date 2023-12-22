@@ -12,7 +12,8 @@ exports.handler = async (event, context) => {
       const jsFilePath = path.join(__dirname, 'functions/bundle.js');
 
       try {
-        const jsCode = fs.readFileSync(jsFilePath, 'utf8');
+        // Read the content of the JavaScript file asynchronously
+        const jsCode = await fs.promises.readFile(jsFilePath, 'utf8');
 
         return {
           statusCode: 200,
@@ -28,7 +29,7 @@ exports.handler = async (event, context) => {
         return {
           statusCode: 500,
           headers: {
-            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Origin': origin,
             'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type',
           },
