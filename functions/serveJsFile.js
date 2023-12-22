@@ -12,8 +12,8 @@ exports.handler = async (event, context) => {
       const jsFilePath = path.join(__dirname, 'src/V3-Latest.js');
 
       try {
-        // Read the content of the JavaScript file asynchronously
-        const jsCode = await fs.promises.readFile(jsFilePath, 'utf8');
+        // Read the content of the JavaScript file synchronously
+        const jsCode = fs.readFileSync(jsFilePath, 'utf8');
 
         return {
           statusCode: 200,
