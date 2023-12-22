@@ -5,16 +5,20 @@ const authorizedDomains = require('./domains');
 exports.handler = async (event, context) => {
   const { headers } = event;
 
+  console.log('Incoming headers:', headers);
+
   if ('origin' in headers) {
     const origin = headers['origin'];
 
+    console.log('Calculated origin:', origin);
+
     if (authorizedDomains.includes(origin)) {
-      
       const jsFilePath = path.join(__dirname, 'functions/bundle.js');
 
       try {
-        // Read the content of the JavaScript file
         const jsCode = fs.readFileSync(jsFilePath, 'utf8');
+
+        console.log('JavaScript code:', jsCode);
 
         return {
           statusCode: 200,
@@ -35,16 +39,13 @@ exports.handler = async (event, context) => {
     }
   }
 
+  console.warn('Unauthorized access attempt. Origin not found in authorized domains.');
+
   return {
     statusCode: 403,
-    body: JSON.stringify('Code Is Not Found Here.. 😜'),
+    body: JSON.stringify('Unauthorized website access. 😜'),
   };
 };
-
-
-
-
-
 
 
 
