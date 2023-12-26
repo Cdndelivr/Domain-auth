@@ -9,34 +9,56 @@ exports.handler = async (event, context) => {
     const origin = headers['origin'];
 
     if (authorizedDomains.includes(origin)) {
-      // Provide the correct path to your JavaScript file
-      const jsFilePath = path.join(__dirname, 'src/V3-Latest.js');
+      // Construct the file path
+      const jsFilePath = path.resolve(__dirname, 'src/V3-latest.js');
+      
+      // Check if the file exists
+      if (fs.existsSync(jsFilePath)) {
+        console.log('File exists:', jsFilePath);
 
-      try {
         // Read the content of the JavaScript file
-        const jsCode = fs.readFileSync(jsFilePath, 'utf8');
+        try {
+          const jsCode = fs.readFileSync(jsFilePath, 'utf8');
+
+          console.log('File read successfully');
+
+          return {
+            statusCode: 200,
+            headers: {
+              'Access-Control-Allow-Origin': origin,
+              'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+              'Access-Control-Allow-Headers': 'Content-Type',
+            },
+            body: jsCode,
+          };
+        } catch (error) {
+          console.error('Error reading file:', error);
+
+          return {
+            statusCode: 500,
+            headers: {
+              'Access-Control-Allow-Origin': origin,
+              'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+              'Access-Control-Allow-Headers': 'Content-Type',
+            },
+            body: JSON.stringify({
+              error: 'Internal Server Error',
+              details: error.message,
+            }),
+          };
+        }
+      } else {
+        console.error('File does not exist:', jsFilePath);
 
         return {
-          statusCode: 200,
-          headers: {
-            'Access-Control-Allow-Origin': origin,
-            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type',
-          },
-          body: jsCode,
-        };
-      } catch (error) {
-        console.error('Error reading JavaScript file:', error);
-        return {
-          statusCode: 500,
+          statusCode: 404,
           headers: {
             'Access-Control-Allow-Origin': origin,
             'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type',
           },
           body: JSON.stringify({
-            error: 'Internal Server Error',
-            details: error.message,
+            error: 'File Not Found',
           }),
         };
       }
