@@ -18,7 +18,7 @@ exports.handler = async (event, context) => {
         return {
           statusCode: 200,
           headers: {
-            'Access-Control-Allow-Origin': origin,
+            'Access-Control-Allow-Origin': '*', // Temporarily allow all origins
             'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type',
           },
@@ -29,7 +29,7 @@ exports.handler = async (event, context) => {
         return {
           statusCode: 500,
           headers: {
-            'Access-Control-Allow-Origin': origin,
+            'Access-Control-Allow-Origin': '*', // Temporarily allow all origins
             'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type',
           },
@@ -54,6 +54,8 @@ exports.handler = async (event, context) => {
     body: JSON.stringify('Unauthorized website access. 😜'),
   };
 };
+
+
 
 
  // const authorizedDomains = require('./domains');
