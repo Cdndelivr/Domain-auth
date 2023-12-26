@@ -11,16 +11,12 @@ exports.handler = async (event, context) => {
     if (authorizedDomains.includes(origin)) {
       // Construct the file path
       const jsFilePath = path.resolve(__dirname, 'src/V3-latest.js');
-      
+
       // Check if the file exists
       if (fs.existsSync(jsFilePath)) {
-        console.log('File exists:', jsFilePath);
-
-        // Read the content of the JavaScript file
         try {
+          // Read the content of the JavaScript file
           const jsCode = fs.readFileSync(jsFilePath, 'utf8');
-
-          console.log('File read successfully');
 
           return {
             statusCode: 200,
@@ -75,6 +71,7 @@ exports.handler = async (event, context) => {
     body: JSON.stringify('Unauthorized website access. 😜'),
   };
 };
+
 
 
 
