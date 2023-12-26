@@ -1,9 +1,7 @@
-const path = require('path');
-
 module.exports = {
   entry: './src/V3-Latest.js',
   output: {
-    filename: 'bundle.js',
+    filename: 'V3-Latest.js', // Specify the desired output file name
     path: path.resolve(__dirname, 'functions'),
   },
   optimization: {
